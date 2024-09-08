@@ -1,10 +1,11 @@
+# File: nginx/base/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
 spec:
   rules:
-  - host: nginx.test  # Dominio
+  - host: $(INGRESS_HOST)
     http:
       paths:
       - path: /
