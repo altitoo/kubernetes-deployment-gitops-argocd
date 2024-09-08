@@ -1,0 +1,10 @@
+resources:
+  - ../../base
+
+configMapGenerator:
+  - name: nginx-html
+    files:
+      - index.html=configmap.yaml
+
+patchesStrategicMerge:
+  - configmap.yaml
