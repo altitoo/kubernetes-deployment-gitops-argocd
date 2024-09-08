@@ -1,11 +1,10 @@
-# File: nginx/overlays/v1/kustomization.yaml
 resources:
   - ../../base
 configMapGenerator:
   - name: nginx-html
     behavior: merge
     files:
-      - index.html
+      - ../../base/src/index.html
     options:
       labels:
         version: v1
@@ -24,3 +23,6 @@ patches:
       - op: replace
         path: /spec/replicas
         value: 1
+      - op: replace
+        path: /spec/template/spec/containers/0/env/0/value
+        value: "v1"
