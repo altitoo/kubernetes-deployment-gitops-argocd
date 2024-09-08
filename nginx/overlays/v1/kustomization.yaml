@@ -5,7 +5,7 @@ configMapGenerator:
   - name: nginx-html
     behavior: merge
     files:
-      - ../../base/index.html
+      - ../../base/src/index.html
     options:
       labels:
         version: v1
