@@ -1,11 +1,11 @@
-# File: nginx/overlays/v2/kustomization.yaml
+# File: nginx/overlays/v1/kustomization.yaml
 resources:
   - ../../base
 configMapGenerator:
   - name: nginx-html
     behavior: merge
     files:
-      - ../../base/src/index.html
+      - index.html
     options:
       labels:
         version: v2
@@ -18,10 +18,17 @@ patches:
         path: /spec/rules/0/host
         value: v2.nginx.test
   - target:
+      kind: Deployment
+      name: nginx-deployment
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+  - target:
       kind: ConfigMap
       name: nginx-html
     patch: |-
       - op: replace
         path: /data/index.html
         value: |-
-          $(sed -e 's/$${VERSION}/v2 (Test)/g' < ../../base/src/index.html)
+          $(sed -e 's/$${VERSION}/v2 (Production)/g' < index.html)
