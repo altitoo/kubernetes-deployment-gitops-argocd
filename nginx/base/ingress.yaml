@@ -1,11 +1,10 @@
-# File: nginx/base/ingress.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
 spec:
   rules:
-  - host: $(INGRESS_HOST)
+  - host: nginx.test  # This will be overridden in overlays
     http:
       paths:
       - path: /

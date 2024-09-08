@@ -5,20 +5,11 @@ configMapGenerator:
   - name: nginx-html
     files:
       - index.html
-vars:
-  - name: INGRESS_HOST
-    objref:
+patches:
+  - target:
       kind: Ingress
       name: nginx-ingress
-    fieldref:
-      fieldpath: spec.rules[0].host
-      
-patchesStrategicMerge:
-  - |-
-    apiVersion: networking.k8s.io/v1
-    kind: Ingress
-    metadata:
-      name: nginx-ingress
-    spec:
-      rules:
-      - host: v1.nginx.test
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: v1.nginx.test
