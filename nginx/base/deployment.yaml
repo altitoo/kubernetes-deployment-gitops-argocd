@@ -1,3 +1,4 @@
+# File: nginx/base/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +23,13 @@ spec:
         volumeMounts:
         - mountPath: /usr/share/nginx/html
           name: html
+        - mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx.conf
+          name: nginx-config
       volumes:
       - name: html
         configMap:
-          name: nginx-html  # Este nombre será reemplazado en los overlays
+          name: nginx-html
+      - name: nginx-config
+        configMap:
+          name: nginx-config

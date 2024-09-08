@@ -3,8 +3,9 @@ resources:
   - ../../base
 configMapGenerator:
   - name: nginx-html
+    behavior: merge
     files:
-      - index.html
+      - ../../base/index.html
     options:
       labels:
         version: v1
@@ -30,4 +31,4 @@ patches:
       - op: replace
         path: /data/index.html
         value: |-
-          $(sed -e 's/${VERSION}/v1 (Production)/g' < index.html)
+          $(sed -e 's/$${VERSION}/v1 (Production)/g' < ../../base/index.html)
