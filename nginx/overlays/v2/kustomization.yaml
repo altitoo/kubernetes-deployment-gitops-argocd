@@ -1,9 +1,13 @@
+# File: nginx/overlays/v2/kustomization.yaml
 resources:
   - ../../base
 configMapGenerator:
   - name: nginx-html
     files:
       - index.html
+    options:
+      labels:
+        version: v2
 patches:
   - target:
       kind: Ingress
@@ -12,3 +16,11 @@ patches:
       - op: replace
         path: /spec/rules/0/host
         value: v2.nginx.test
+  - target:
+      kind: ConfigMap
+      name: nginx-html
+    patch: |-
+      - op: replace
+        path: /data/index.html
+        value: |-
+          $(sed -e 's/${VERSION}/v2 (Test)/g' < index.html)
