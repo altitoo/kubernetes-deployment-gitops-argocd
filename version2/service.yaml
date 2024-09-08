@@ -4,7 +4,7 @@ metadata:
   name: nginx-service
 spec:
   selector:
-    app: nginx-v1  # Cambia a nginx-v2 si deseas desplegar la versión 2
+    app: nginx-v2  # Cambia a nginx-v2 si deseas desplegar la versión 2
   ports:
     - protocol: TCP
       port: 80
