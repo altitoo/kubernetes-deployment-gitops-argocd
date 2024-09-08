@@ -24,11 +24,3 @@ patches:
       - op: replace
         path: /spec/replicas
         value: 2
-  - target:
-      kind: ConfigMap
-      name: nginx-html
-    patch: |-
-      - op: replace
-        path: /data/index.html
-        value: |-
-          $(sed -e 's/$${VERSION}/v2 (Production)/g' < index.html)
