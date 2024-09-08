@@ -25,4 +25,4 @@ spec:
       volumes:
       - name: html
         configMap:
-          name: nginx-html
+          name: nginx-html  # Este nombre será reemplazado en los overlays

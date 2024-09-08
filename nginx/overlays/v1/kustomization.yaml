@@ -1,6 +1,5 @@
 resources:
-  - ../../base/deployment.yaml  
-  - ../../base/service.yaml
+  - ../../base
 
 configMapGenerator:
   - name: nginx-html

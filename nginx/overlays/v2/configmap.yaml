@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-html-v2
+  name: nginx-html  # Debe coincidir con el nombre que usa el Deployment
 data:
   index.html: |
     <!DOCTYPE html>
