@@ -1,3 +1,4 @@
+# File: nginx/base/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,9 +20,6 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
-        env:
-        - name: VERSION
-          value: "Base Version"
         volumeMounts:
         - mountPath: /usr/share/nginx/html
           name: html
