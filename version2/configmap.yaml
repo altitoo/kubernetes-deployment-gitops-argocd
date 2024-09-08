@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html-v2
+data:
+  index.html: |
+    <html>
+    <head><title>NGINX Version 2</title></head>
+    <body>
+    <h1>Welcome to NGINX - Version 2</h1>
+    </body>
+    </html>
