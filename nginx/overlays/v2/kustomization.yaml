@@ -24,4 +24,4 @@ patches:
       - op: replace
         path: /data/index.html
         value: |-
-          $(sed -e 's/$${VERSION}/v2 (Test)/g' < ../../base/index.html)
+          $(sed -e 's/$${VERSION}/v2 (Test)/g' < ../../base/src/index.html)

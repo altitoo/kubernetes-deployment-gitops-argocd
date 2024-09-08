@@ -7,3 +7,6 @@ configMapGenerator:
 - name: nginx-config
   files:
   - src/nginx.conf
+- name: nginx-html
+  files:
+  - src/index.html
