@@ -84,6 +84,7 @@ winget install Kubernetes.minikube
 
 To enable `Ingress` in Minikube:
 ```bash
+minikube start
 minikube addons enable ingress
 ```
 
@@ -160,3 +161,9 @@ After adding the entries to your `hosts` file, you can access the NGINX services
 
 - [http://dev.nginx.test/](http://dev.nginx.test/)
 - [http://pro.nginx.test/](http://pro.nginx.test/)
+
+## 10. Delete resources
+
+```bash
+minikube delete
+```
