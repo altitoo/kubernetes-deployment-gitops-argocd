@@ -8,7 +8,7 @@ configMapGenerator:
       - index.html
     options:
       labels:
-        version: v1
+        version: pro
 patches:
   - target:
       kind: Ingress
@@ -16,11 +16,11 @@ patches:
     patch: |-
       - op: replace
         path: /spec/rules/0/host
-        value: v1.nginx.test
+        value: pro.nginx.test
   - target:
       kind: Deployment
       name: nginx-deployment
     patch: |-
       - op: replace
         path: /spec/replicas
-        value: 1
+        value: 2

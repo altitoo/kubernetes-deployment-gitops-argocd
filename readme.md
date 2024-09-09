@@ -4,6 +4,45 @@ This guide provides step-by-step instructions to install and configure Kubernete
 
 ---
 
+# Architecture Diagram
+
+```mermaid
+graph TD
+    subgraph Kubernetes Cluster
+        subgraph Namespace_dev
+            A1[Deployment: nginx-deployment-v1] --> B1[Service: nginx-service-dev]
+            B1 --> C1[Ingress: nginx-ingress-dev]
+            A1 --> D1[ConfigMap: nginx-config-v1]
+            A1 --> E1[ConfigMap: nginx-html-v1]
+        end
+
+        subgraph Namespace_prod
+            A2[Deployment: nginx-deployment-v2] --> B2[Service: nginx-service-prod]
+            B2 --> C2[Ingress: nginx-ingress-prod]
+            A2 --> D2[ConfigMap: nginx-config-v2]
+            A2 --> E2[ConfigMap: nginx-html-v2]
+        end
+
+        subgraph Namespace_argocd
+            Argo[ArgoCD] --> App1[Application: NGINX-v1]
+            Argo --> App2[Application: NGINX-v2]
+        end
+    end
+
+    subgraph GitRepo
+        Repo[Git Repo: NGINX Manifests]
+    end
+
+    Repo --> App1
+    Repo --> App2
+    
+    App1 --> |Sync| Namespace_dev
+    App2 --> |Sync| Namespace_prod
+
+```
+
+---
+
 ## 1. Install Windows Package Manager (winget)
 
 First, download and install the Windows Package Manager (winget) from the Microsoft Store:
