@@ -10,22 +10,22 @@ This guide provides step-by-step instructions to install and configure Kubernete
 graph TD
     subgraph Kubernetes Cluster
         subgraph Namespace_dev
-            A1[Deployment: nginx-deployment-v1] --> B1[Service: nginx-service-dev]
+            A1[Deployment: nginx-deployment-dev] --> B1[Service: nginx-service-dev]
             B1 --> C1[Ingress: nginx-ingress-dev]
-            A1 --> D1[ConfigMap: nginx-config-v1]
-            A1 --> E1[ConfigMap: nginx-html-v1]
+            A1 --> D1[ConfigMap: nginx-config-dev]
+            A1 --> E1[ConfigMap: nginx-html-dev]
         end
 
-        subgraph Namespace_prod
-            A2[Deployment: nginx-deployment-v2] --> B2[Service: nginx-service-prod]
-            B2 --> C2[Ingress: nginx-ingress-prod]
-            A2 --> D2[ConfigMap: nginx-config-v2]
-            A2 --> E2[ConfigMap: nginx-html-v2]
+        subgraph Namespace_pro
+            A2[Deployment: nginx-deployment-pro] --> B2[Service: nginx-service-pro]
+            B2 --> C2[Ingress: nginx-ingress-pro]
+            A2 --> D2[ConfigMap: nginx-config-pro]
+            A2 --> E2[ConfigMap: nginx-html-pro]
         end
 
         subgraph Namespace_argocd
-            Argo[ArgoCD] --> App1[Application: NGINX-v1]
-            Argo --> App2[Application: NGINX-v2]
+            Argo[ArgoCD] --> App1[Application: NGINX-dev]
+            Argo --> App2[Application: NGINX-pro]
         end
     end
 
@@ -37,7 +37,7 @@ graph TD
     Repo --> App2
     
     App1 --> |Sync| Namespace_dev
-    App2 --> |Sync| Namespace_prod
+    App2 --> |Sync| Namespace_pro
 
 ```
 
@@ -137,8 +137,8 @@ Use the username `admin` and the password retrieved in the previous step.
 To retrieve the URL for your NGINX service, run:
 
 ```bash
-minikube service nginx-service --url -n default
-minikube service nginx-service --url -n prod
+minikube service nginx-service --url -n dev
+minikube service nginx-service --url -n pro
 ```
 
 ---
@@ -148,8 +148,8 @@ minikube service nginx-service --url -n prod
 Add the NGINX service IP addresses to your system's `hosts` file for easy access:
 
 ```bash
-Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$(minikube ip) v1.nginx.test" -Force
-Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$(minikube ip) v2.nginx.test" -Force
+Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$(minikube ip) dev.nginx.test" -Force
+Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$(minikube ip) pro.nginx.test" -Force
 ```
 
 ---
@@ -158,5 +158,5 @@ Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$(minikube ip
 
 After adding the entries to your `hosts` file, you can access the NGINX services in your browser at the following URLs:
 
-- [http://v1.nginx.test/](http://v1.nginx.test/)
-- [http://v2.nginx.test/](http://v2.nginx.test/)
+- [http://dev.nginx.test/](http://dev.nginx.test/)
+- [http://pro.nginx.test/](http://pro.nginx.test/)
