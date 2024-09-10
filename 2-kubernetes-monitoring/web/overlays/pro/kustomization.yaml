@@ -11,18 +11,18 @@ patches:
         value: 3
       - op: replace
         path: /spec/maxReplicas
-        value: 10
+        value: 15
       - op: replace
         path: /spec/metrics/0/resource/target/averageUtilization
         value: 50
 
-  # - target:
-  #     kind: Deployment
-  #     name: demo-webapp
-  #   patch: |-
-  #     - op: replace
-  #       path: /spec/replicas
-  #       value: 3
+  - target:
+      kind: Deployment
+      name: demo-webapp
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
 
   - target:
       kind: Ingress

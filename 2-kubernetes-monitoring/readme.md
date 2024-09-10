@@ -67,8 +67,6 @@ kubectl create namespace monitoring
 helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
 ```
 
-## Step 6: Access Grafana and Retrieve Initial Password
-
 Grafana will be exposed on port 3000. Use port-forwarding to access its web interface.
 
 ```bash
@@ -87,10 +85,6 @@ You can now access Grafana at `http://localhost:3000` with the username `admin`.
 ## Step 7: Set Up Ingress to Expose Your Web Application
 
 Ensure that Ingress is enabled in Minikube:
-
-```bash
-minikube addons enable ingress
-```
 
 Update your `/etc/hosts` file or Windows hosts file to map Minikube IP to environment-specific domains:
 
