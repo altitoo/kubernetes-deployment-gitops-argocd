@@ -96,10 +96,15 @@ Update your `/etc/hosts` file or Windows hosts file to map Minikube IP to enviro
 
 ```bash
 $minikubeIP = minikube ip
-
 Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$($minikubeIP) dev.demo-webapp.local" -Force
 Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$($minikubeIP) pre.demo-webapp.local" -Force
 Add-Content -Path $env:windir\System32\drivers\etc\hosts -Value "`n$($minikubeIP) demo-webapp.com" -Force
 ```
 
 By following these steps, you’ll have a web application deployed, monitored with Prometheus and Grafana, and set up with autoscaling via an HPA. You can visualize how pods scale up as traffic increases in Grafana.
+
+## Step 8: Execute load testing against our web
+
+```bash
+winget install -e --id k6.k6
+```

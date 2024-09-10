@@ -2,17 +2,34 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: demo-webapp-hpa
+  namespace: pro
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: demo-webapp
-  minReplicas: 1
-  maxReplicas: 5
+  minReplicas: 3
+  maxReplicas: 10
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50  # Target 50% CPU utilization for scaling
+        averageUtilization: 50
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0  # Allows faster scale-up
+      policies:
+      - type: Pods
+        value: 5  # Increase by 5 pods at once if needed
+        periodSeconds: 30  # Period over which scaling happens
+      - type: Percent
+        value: 100
+        periodSeconds: 30
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Slows down scale-down to prevent frequent scaling changes
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 60
