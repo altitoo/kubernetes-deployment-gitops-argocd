@@ -16,19 +16,3 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
-  behavior:
-    scaleUp:
-      stabilizationWindowSeconds: 60
-      policies:
-      - type: Pods
-        value: 2
-        periodSeconds: 60
-      - type: Percent
-        value: 50
-        periodSeconds: 60
-    scaleDown:
-      stabilizationWindowSeconds: 300  # Prevents premature scaling down
-      policies:
-      - type: Percent
-        value: 50
-        periodSeconds: 60
