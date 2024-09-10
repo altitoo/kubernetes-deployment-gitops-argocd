@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: demo-webapp
-        image: hashicorp/demo-webapp:latest
+        image: yeasy/simple-web:latest
         ports:
         - containerPort: 80
         resources:

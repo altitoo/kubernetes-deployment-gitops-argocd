@@ -1,4 +1,4 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: demo-webapp-hpa
@@ -7,12 +7,12 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: demo-webapp
-  minReplicas: 2  # Default value, can be patched in the overlays
-  maxReplicas: 10  # Default value, can be patched in the overlays
+  minReplicas: 1
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50  # Default CPU utilization target
+        averageUtilization: 50  # Target 50% CPU utilization for scaling
