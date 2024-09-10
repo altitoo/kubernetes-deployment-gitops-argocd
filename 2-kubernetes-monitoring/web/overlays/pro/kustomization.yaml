@@ -1,0 +1,7 @@
+resources:
+  - ../../base
+  - hpa.yaml
+
+patchesStrategicMerge:
+  - patch-deployment.yaml
+  - patch-ingress.yaml
