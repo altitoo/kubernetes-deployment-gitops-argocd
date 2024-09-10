@@ -18,17 +18,17 @@ spec:
         averageUtilization: 50
   behavior:
     scaleUp:
-      stabilizationWindowSeconds: 0  # Allows faster scale-up
+      stabilizationWindowSeconds: 60
       policies:
       - type: Pods
-        value: 5  # Increase by 5 pods at once if needed
-        periodSeconds: 30  # Period over which scaling happens
+        value: 2
+        periodSeconds: 60
       - type: Percent
-        value: 100
-        periodSeconds: 30
+        value: 50
+        periodSeconds: 60
     scaleDown:
-      stabilizationWindowSeconds: 300  # Slows down scale-down to prevent frequent scaling changes
+      stabilizationWindowSeconds: 300  # Prevents premature scaling down
       policies:
       - type: Percent
-        value: 100
+        value: 50
         periodSeconds: 60
