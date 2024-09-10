@@ -1,20 +1,32 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
+// Define the test options
 export let options = {
     stages: [
-        { duration: '30s', target: 500 }, // Ramp-up to 20 users over 30 seconds
-        { duration: '2m', target: 2000 }, // Stay at 50 users for 1 minute
-        { duration: '1m', target: 10 }, // Ramp-down to 0 users over 30 seconds
+        { duration: '30s', target: 100 }, // Ramp-up to 100 users over 30 seconds
+        { duration: '2m', target: 1000 }, // Ramp-up to 1000 users over 2 minutes
+        { duration: '3m', target: 2000 }, // Hold steady at 2000 users for 3 minutes
+        { duration: '1m', target: 500 }, // Ramp-down to 500 users over 1 minute
+        { duration: '30s', target: 0 }, // Ramp-down to 0 users over 30 seconds
     ],
+    thresholds: {
+        http_req_duration: ['p(95)<2000'], // 95% of requests should be below 2 seconds
+        http_req_failed: ['rate<0.01'], // Allow 1% of requests to fail
+    },
 };
 
+// Define the test behavior
 export default function() {
-    // Replace with your Minikube endpoint or Ingress host (http://dev.demo-webapp.local)
+    // Replace with your Minikube endpoint or Ingress host
     let res = http.get('http://demo-webapp.com/');
 
-    // Check for successful response status
+    // Check if the response was successful
     check(res, {
         'status was 200': (r) => r.status === 200,
+        'response time < 2s': (r) => r.timings.duration < 2000,
     });
+
+    // Sleep to simulate real user interaction
+    sleep(1);
 }
