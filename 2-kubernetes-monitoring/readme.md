@@ -101,4 +101,5 @@ By following these steps, you’ll have a web application deployed, monitored wi
 
 ```bash
 winget install -e --id k6.k6
+k6 run .\load-test-pro.js
 ```

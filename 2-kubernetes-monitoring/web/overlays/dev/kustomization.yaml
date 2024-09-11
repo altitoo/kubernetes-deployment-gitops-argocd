@@ -15,15 +15,6 @@ patches:
       - op: replace
         path: /spec/metrics/0/resource/target/averageUtilization
         value: 70
-
-  - target:
-      kind: Deployment
-      name: demo-webapp
-    patch: |-
-      - op: replace
-        path: /spec/replicas
-        value: 1
-
   - target:
       kind: Ingress
       name: demo-webapp-ingress
